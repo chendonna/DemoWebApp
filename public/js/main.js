@@ -1,29 +1,25 @@
-$(document).ready(function() {
-        console.log("in ready");
-        getWeather();
-});
-
-function searchWeather() {
-        var searchQuery = $('.search').val();
-        getWeather(searchQuery);
-}
-
-function getWeather() {
+function getWeather(searchQuery) {
         var url = 'http://api.openweathermap.org/data/2.5/weather?';
         var params = {
-                units = 'imperial',
-                APPID = apiKey,
-        }
-        console.log(apiKey);
+                units: 'imperial',
+                APPID: apiKey,
+        };
         if (searchQuery) {
-                params.id = searchQuery;
+                params.q = searchQuery;
         } else {
                 params.id = 4930956;
         }
-        $.ajax(url + $param(params), {
-                sucess:function(data) {
+        $.ajax(url + $.param(params), {
+                success: function (data) {
+
                         $('.city').text(data.name);
-                        $('.temp').text(data.main.temp + ' F');
+                        $('.temp').text(data.main.temp + ' °F');
+                }, error: function (error) {
+                        $('.error-message').text('An error occurred!');
                 }
         });
+}
+function searchWeather() {
+        var searchQuery = $('.search').val();
+        getWeather(searchQuery);
 }

@@ -1,9 +1,7 @@
 $(document).ready(function() {
+        console.log("in ready");
         getWeather();
 });
-function myFunction() {
-  document.getElementById("demo").innerHTML = "NEWWW PARAGRAPH #javascript #swag";
-}
 
 function searchWeather() {
         var searchQuery = $('.search').val();
@@ -14,10 +12,11 @@ function getWeather() {
         var url = 'http://api.openweathermap.org/data/2.5/weather?';
         var params = {
                 units = 'imperial',
-                APPID = process.env.API_KEY,
+                APPID = apiKey,
         }
+        console.log(apiKey);
         if (searchQuery) {
-                params.q = searchQuery;
+                params.id = searchQuery;
         } else {
                 params.id = 4930956;
         }
